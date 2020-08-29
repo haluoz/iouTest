@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-let {getUserById,createUser,getUsers} = require("../service/userService.js");
+const {getUserById,createUser,getUsers} = require("../service/userService.js");
+const baseResult = require("../base/baseResult");
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
   let users = await getUsers();
-  res.json({status: "success", data: users});
+  res.json(new baseResult("success",users));
 });
 
 router.get('/:id', async function(req, res, next) {
