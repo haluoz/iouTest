@@ -7,8 +7,9 @@ const mongoose = require("mongoose");
 
 mongoose.connect('mongodb://localhost/iou');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let requestsRouter = require('./routes/requests');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/requests', requestsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

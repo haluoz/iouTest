@@ -12,9 +12,9 @@ router.get('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
   try{
     let user = await getUserById(req.params.id);
-    res.json({status: "success", data: user});
+    res.json(new baseResult("success",user));
   }catch (e) {
-    res.json({status: "fail", data: e.message});
+    res.json(new baseResult("fail",e.message));
   }
 });
 
@@ -25,9 +25,9 @@ router.post('/', async function(req, res, next) {
     let email = req.body.email;
     console.log(username);
     await createUser(username,password,email);
-    res.json({status: "success", data: null});
+    res.json(new baseResult("success",null));
   }catch (e) {
-    res.json({status: "fail", data: e.message});
+    res.json(new baseResult("fail",e.message));
   }
 });
 

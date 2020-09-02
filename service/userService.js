@@ -8,7 +8,7 @@ const getUserById = async (id) => {
     return user;
 };
 
-const getUsers = async (id) => {
+const getUsers = async () => {
     return await userDao.find();
 };
 
