@@ -5,6 +5,7 @@ const {getRequests, createRequest, addReward, deleteReward} = require("../servic
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
+  console.log('I am requested at port 8889')
   let requests = await getRequests();
   res.json(new baseResult("success",requests));
 });

@@ -5,7 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/iou');
+mongoose.connect('mongodb://localhost/iou',(err)=>{
+  if(err){
+    console.warn('数据库连接失败：'+err);
+  }else {
+    console.log('数据库connect成功');
+  }
+});
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
