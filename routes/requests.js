@@ -2,13 +2,33 @@ const express = require('express');
 const router = express.Router();
 const baseResult = require("../base/baseResult");
 const {getRequests, createRequest, addReward, deleteReward} = require("../service/requestService");
+//const redis = require("redis");
+
+//const client = redis.createClient("6379");
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-  console.log('I am requested at port 8889')
+// router.get('/', async function(req, res, next) {
+//   let requests = null;
+//   requests = await new Promise( (resolve) => {
+//     client.get("requestsList",function(err, res){
+//       return resolve(res);
+//     });
+//   });
+//   if (requests != null && requests.length > 0){
+//     res.json(new baseResult("redis success",JSON.parse(requests)));
+//   }else {
+//     requests = await getRequests();
+//     client.set("requestsList",  JSON.stringify(requests), function (err) {});
+//     res.json(new baseResult("success",requests));
+//   }
+// });
+
+router.get('/all', async function(req, res, next) {
   let requests = await getRequests();
   res.json(new baseResult("success",requests));
 });
+
+
 
 router.post('/', async function(req, res, next) {
   try {

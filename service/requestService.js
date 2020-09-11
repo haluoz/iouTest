@@ -2,7 +2,7 @@ let requestDao = require("../dao/request");
 let rewardDao = require("../dao/reward");
 const mongoose = require("mongoose");
 
-const getRequests = async () => {
+const getRequests = () => {
     return requestDao.aggregate([{
         $lookup: {
             from: 'rewards',
@@ -14,6 +14,25 @@ const getRequests = async () => {
     // let requests = await requestDao.find();
     // return requests;
 };
+
+const getRequest = (requestId) => {
+    return requestDao.aggregate([
+        {
+            $lookup: {
+                from: 'rewards',
+                localField: 'reward',
+                foreignField: '_id',
+                as: 'reward'
+            }
+        },
+        {
+            $match:{
+                _id: mongoose.Types.ObjectId(requestId)
+            }
+        }
+    ]);
+};
+
 
 const createRequest = async (request, description,  publisher, reward) => {
     let rewardId = mongoose.Types.ObjectId();
@@ -93,6 +112,7 @@ module.exports = {
     getRequests,
     createRequest,
     addReward,
-    deleteReward
+    deleteReward,
+    getRequest
 };
 

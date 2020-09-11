@@ -7,11 +7,12 @@ const mongoose = require("mongoose");
 
 mongoose.connect('mongodb://localhost/iou',(err)=>{
   if(err){
-    console.warn('数据库连接失败：'+err);
+    console.warn('database connect fail：'+err);
   }else {
-    console.log('数据库connect成功');
+    console.log('database connect success');
   }
 });
+
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
